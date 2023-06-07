@@ -3,11 +3,18 @@
 {% block title %}Edit Voiture{% endblock %}
 
 {% block body %}
+<div class = "row">
+        <div class= "col-md-6 mx-auto">
     <h1>Edit Voiture</h1>
-
+<p>
     {{ include('voiture/_form.html.twig', {'button_label': 'Update'}) }}
-
-    <a href="{{ path('app_voiture_index') }}">back to list</a>
-
+</p>
+<p> 
+    <a href="{{ path('app_voiture_index') }}"> back to list </a> 
+</p>
+<p>
     {{ include('voiture/_supprimer_form.html.twig') }}
+    </p>
+    </div>
+    </div>
 {% endblock %}

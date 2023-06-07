@@ -30,7 +30,7 @@ class VoitureController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $voitureRepository->save($voiture, true);
-            $this->addFlash('success', 'Voiture  successfully cree !');
+            $this->addFlash('success', 'Vous avez créé la voiture avec succès !');
             return $this->redirectToRoute('app_voiture_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -56,7 +56,7 @@ class VoitureController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $voitureRepository->save($voiture, true);
-            $this->addFlash('success', 'Voiture successfully editer !');
+            $this->addFlash('success', 'Vous avez modifié la voiture avec succès!');
             return $this->redirectToRoute('app_voiture_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -73,7 +73,7 @@ class VoitureController extends AbstractController
             $voitureRepository->remove($voiture, true);
         }
        
-        $this->addFlash('info', 'Voiture  successfully supprime!'); 
+        $this->addFlash('info', 'Vous avez supprimé la voiture avec succès!'); 
         return $this->redirectToRoute('app_voiture_index', [], Response::HTTP_SEE_OTHER);
     }
 }

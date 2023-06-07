@@ -17,6 +17,7 @@ class VoitureType extends AbstractType
             ->add('couleur')
             ->add('annee')
             ->add('prix')
+            ->add('imageName')
         ;
     }
 

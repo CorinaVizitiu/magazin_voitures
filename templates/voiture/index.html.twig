@@ -8,29 +8,26 @@
     <table class="table">
         <thead>
             <tr>
-              
+               <th>Images</th>
                 <th>Nom</th>
-                <th>Marque</th>
-                <th>Couleur</th>
-                <th>Annee</th>
-                <th>Prix</th>
-                <th>actions</th>
+{#              
+                <th>actions</th> #}
             </tr>
         </thead>
         <tbody>
         {% for voiture in voitures %}
+       
             <tr>
-               
-                <td>{{ voiture.nom }}</td>
-                <td>{{ voiture.marque }}</td>
-                <td>{{ voiture.couleur }}</td>
-                <td>{{ voiture.annee }}</td>
-                <td>{{ voiture.prix }}</td>
+                  <td><img src = {{ voiture.imageName }} width="250" height="200"></td> 
+                <td><a href="{{ path('app_voiture_details', {'id': voiture.id}) }}">{{ voiture.nom }}
+                  </a> <p>By {{ voiture.user.nom ~ " " ~ voiture.user.prenom}}</p></td>
+{#              
                 <td>
-                    <a href="{{ path('app_voiture_details', {'id': voiture.id}) }}">Details</a>
-                    <a href="{{ path('app_voiture_editer', {'id': voiture.id}) }}">Editer</a>
-                </td>
+                    {# <a href="{{ path('app_voiture_details', {'id': voiture.id}) }}">Details</a> #}
+                    {# <a href="{{ path('app_voiture_editer', {'id': voiture.id}) }}">Editer</a> #}
+                {# </td>  #}
             </tr>
+             
         {% else %}
             <tr>
                 <td colspan="7">no records found</td>
@@ -39,5 +36,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_voiture_creer') }}">Creer </a>
+    <a href="{{ path('app_voiture_creer') }}" class="btn btn-success">Creer </a>
 {% endblock %}

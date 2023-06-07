@@ -3,11 +3,14 @@
 {% block title %}Voiture{% endblock %}
 
 {% block body %}
-    <h1>Voiture</h1>
+<div class = "row">
+        <div class= "col-md-6 mx-auto">
+    <h1>{{ voiture.nom }}</h1>
 
     <table class="table">
         <tbody>
             <tr>
+           <img src = {{ voiture.imageName }} width="250" height="200">
                 <th>Id</th>
                 <td>{{ voiture.id }}</td>
             </tr>
@@ -30,13 +33,24 @@
             <tr>
                 <th>Prix</th>
                 <td>{{ voiture.prix }}</td>
+           
+            </tr>
+            <tr>
+            <p> By {{ voiture.user.nom ~ " " ~ voiture.user.prenom}}</p>
             </tr>
         </tbody>
     </table>
-
+    <p>
+    <a href="{{ path('app_voiture_editer', {'id': voiture.id}) }}" class="btn btn-primary">Editer</a>
+</p>
+<p>
     <a href="{{ path('app_voiture_index') }}">back to list</a>
+</p>
 
-    <a href="{{ path('app_voiture_editer', {'id': voiture.id}) }}">edit</a>
-
+<p>
     {{ include('voiture/_supprimer_form.html.twig') }}
+    </p>
+    
+    </div>
+    </div>
 {% endblock %}
