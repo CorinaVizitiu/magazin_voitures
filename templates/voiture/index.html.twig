@@ -1,40 +1,74 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Voiture index{% endblock %}
-
+{% block title %}Voiture index
+{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('public/css/style.css') }}">
+{% endblock %}
 {% block body %}
-    <h1>Voiture index</h1>
+{% include 'layouts/partials/_search_data.html.twig' with {
+           form: form
+		} only  %}
+<div class = "row">
+<div class = "col-md-10 mx-auto text-center position-relative p-5 text-muted bg-body border border-dashed rounded-5 bg-success-subtle">
+	<h1>Most wanted</h1>
+	
+	<table class="table" >
+		<thead>
+			<tr>
+				<th>Images</th>
+				<th>Nom</th>
+                <th>Actions</th>
+			   <th>Like</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for voiture in pagination %}
 
-    <table class="table">
-        <thead>
-            <tr>
-               <th>Images</th>
-                <th>Nom</th>
-{#              
-                <th>actions</th> #}
-            </tr>
-        </thead>
-        <tbody>
-        {% for voiture in voitures %}
-       
-            <tr>
-                  <td><img src = {{ voiture.imageName }} width="250" height="200"></td> 
-                <td><a href="{{ path('app_voiture_details', {'id': voiture.id}) }}">{{ voiture.nom }}
-                  </a> <p>By {{ voiture.user.nom ~ " " ~ voiture.user.prenom}}</p></td>
-{#              
-                <td>
-                    {# <a href="{{ path('app_voiture_details', {'id': voiture.id}) }}">Details</a> #}
-                    {# <a href="{{ path('app_voiture_editer', {'id': voiture.id}) }}">Editer</a> #}
-                {# </td>  #}
-            </tr>
-             
-        {% else %}
-            <tr>
-                <td colspan="7">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+				<tr>
+				
+					<td><img style="max-width: 250px;" src={{ vich_uploader_asset(voiture, 'imageFile') }} ></td>
+					<td>
+						<a href="{{ path('app_voiture_details', {'id': voiture.id}) }}">{{ voiture.nom }}
+						</a>
+						<p>By
+							{{ voiture.user.nom ~ " " ~ voiture.user.prenom}}</p>
+					</td>
+					<td>
+					{% if app.user %}
+						{% if app.user.nom is same as (voiture.user.nom) %}
+							
+								<a href="{{ path('app_voiture_details', {'id': voiture.id}) }}" class="btn btn-primary">Details</a>
+								<a href="{{ path('app_voiture_editer', {'id': voiture.id}) }}" class="btn btn-success">Editer</a>
+						
+						{% endif %}
+					{% endif %}
+					</td>
+					<td>
+					{% include "layouts/partials/_like.html.twig"%}
+					</td>
+				</tr>
 
-    <a href="{{ path('app_voiture_creer') }}" class="btn btn-success">Creer </a>
+			{% else %}
+				<tr>
+					<td colspan="7">no records found</td>
+				</tr>
+			{% endfor %}
+		
+			</div>
+			</div>
+		</tbody>
+	</table>
+
+	{# <a href="{{ path('app_voiture_creer') }}" class="btn btn-success">Creer </a> #}
+
+<nav aria-label="Page navigation example">
+  <ul class="pagination justify-content-center ">
+    <li class="page-item disabled">
+    <div class="navigation flex justify-center mb-8" >
+    {{knp_pagination_render(pagination)}}</div>
+   </li>
+    </nav>
+    </ul>
 {% endblock %}

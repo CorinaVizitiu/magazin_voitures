@@ -4,14 +4,15 @@
 
 {% block body %}
 <div class = "row">
-        <div class= "col-md-6 mx-auto">
+        <div class= "col-md-3 mx-auto">
     <h1>{{ voiture.nom }}</h1>
 
     <table class="table">
         <tbody>
             <tr>
-           <img src = {{ voiture.imageName }} width="250" height="200">
+         <img style="max-width: 250px;" src={{ vich_uploader_asset(voiture, 'imageFile') }}>
                 <th>Id</th>
+
                 <td>{{ voiture.id }}</td>
             </tr>
             <tr>
@@ -41,16 +42,21 @@
         </tbody>
     </table>
     <p>
-    <a href="{{ path('app_voiture_editer', {'id': voiture.id}) }}" class="btn btn-primary">Editer</a>
-</p>
-<p>
     <a href="{{ path('app_voiture_index') }}">back to list</a>
 </p>
+	{% if app.user %}
+				{% if app.user.nom is same as (voiture.user.nom) %}
+    <p>
+    <a href="{{ path('app_voiture_editer', {'id': voiture.id}) }}" class="btn btn-primary">Editer</a>
+</p>
+
 
 <p>
     {{ include('voiture/_supprimer_form.html.twig') }}
     </p>
-    
+   	{% endif %}	
+{% endif %} 
+
     </div>
     </div>
 {% endblock %}
